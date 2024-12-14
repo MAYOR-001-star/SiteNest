@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+  <title>SignIn Page</title>
+</head>
+<body>
+  <h1>SignIn Page</h1>
+  <p id="userlink"></p>
+  <button id="sign_out" type="button">Logout</button><br>
+
+  <form id="blog-form">
+    <input type="text" id="blog-title" placeholder="Title" required />
+    <textarea id="blog-content" rows="4" cols="50" placeholder="Enter your text here..." required></textarea>
+    <button id="blog-btn" type="submit">Add Blog</button>
+  </form>
+
+  <div id="bloggg">
+    <h2>Your Blogs</h2>
+    <ul id="blog-list"></ul>
+  </div>
+  
+
+  <p>
+    Don't have an account? <span><a href="./Create_Account.html">create account</a></span>
+  </p>
+  <p>
+    Already have an account? <span><a href="./Login.html">login</a></span>
+  </p>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getFirestore, doc, getDoc, setDoc, addDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDpbbUqwhYv9b4IWlE-D60hzwGCsa16nXA",
+      authDomain: "sitenest-318b4.firebaseapp.com",
+      projectId: "sitenest-318b4",
+      storageBucket: "sitenest-318b4.appspot.com",
+      messagingSenderId: "464415746140",
+      appId: "1:464415746140:web:00391c12212d034e56de99"
+    };
+
+    // Initialize Firebase and Firestore
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore();
+
+    // Select elements
+    const sign_outBtn = document.querySelector("#sign_out");
+    const userlink = document.querySelector("#userlink");
+    const blogForm = document.querySelector("#blog-form");
+    const blogTitle = document.querySelector("#blog-title");
+    const blogContent = document.querySelector("#blog-content");
+    const blogList = document.querySelector("#blog-list");
+
+    let currentUser = null;
+
+    // Login function to determine if user is logged in
+    function login() {
+      if (localStorage.getItem("keepLoggedIn") === "yes") {
+        currentUser = JSON.parse(localStorage.getItem("user"));
+      } else {
+        currentUser = JSON.parse(sessionStorage.getItem("user"));
+      }
+    }
+
+    // Sign-out function
+    function signOut() {
+      localStorage.removeItem("user");
+      localStorage.removeItem("keepLoggedIn");
+      sessionStorage.removeItem("user");
+      window.location.href = "./Login.html";
+    }
+
+    // Fetch and display blogs
+    async function fetchAndDisplayBlogs() {
+      if (!currentUser || !currentUser.email) return;
+
+      blogList.innerHTML = ""; // Clear the list
+
+      const blogsCollectionRef = collection(db, "users", currentUser.email, "blogs");
+      const querySnapshot = await getDocs(blogsCollectionRef);
+
+      querySnapshot.forEach((doc) => {
+        const blog = doc.data();
+        const li = document.createElement("li");
+        li.textContent = `${blog.title}: ${blog.content}`;
+        blogList.appendChild(li);
+      });
+    }
+
+    // Add blog with duplicate title check
+    blogForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      try {
+        const email = currentUser.email;
+        const title = blogTitle.value.trim();
+        const content = blogContent.value.trim();
+
+        if (!title || !content) {
+          alert("All fields must be filled!");
+          return;
+        }
+
+        const blogsCollectionRef = collection(db, "users", email, "blogs");
+        const querySnapshot = await getDocs(blogsCollectionRef);
+
+        const duplicate = querySnapshot.docs.find(
+          (doc) => doc.data().title.toLowerCase() === title.toLowerCase()
+        );
+
+        if (duplicate) {
+          alert("A blog with the same title already exists! Please use a different title.");
+          return;
+        }
+
+        await addDoc(blogsCollectionRef, {
+          title,
+          content,
+          createdAt: new Date(),
+        });
+
+        alert("Blog added successfully!");
+        blogForm.reset(); // Clear form
+        await fetchAndDisplayBlogs(); // Refresh blogs
+      } catch (error) {
+        console.error("Error adding blog:", error);
+        alert(`Error: ${error.message}`);
+      }
+    });
+
+    // Ensure DOM is fully loaded before running the script
+    document.addEventListener("DOMContentLoaded", async () => {
+      login();
+      if (currentUser === null) {
+        userlink.textContent = "Please login";
+        blogForm.style.display = "none";
+        document.querySelector("#bloggg").style.display = "none"
+        sign_outBtn.style.display = "none"
+      } else {
+        userlink.textContent = `Welcome, ${currentUser.displayName || currentUser.username}`;
+        blogForm.style.display = "block";
+        document.querySelector("#bloggg").style.display = "block"
+        sign_outBtn.style.display = "block"
+        await fetchAndDisplayBlogs();
+      }
+    });
+
+    sign_outBtn.addEventListener("click", signOut);
+  </script>
+</body>
+</html>
+
