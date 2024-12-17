@@ -1,0 +1,14 @@
+.container{
+    margin: 0 auto;
+    width: 45rem;
+    height: 45rem;
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form{
+    width: 50%;
+    height: 100%;
+    background: white;
+}

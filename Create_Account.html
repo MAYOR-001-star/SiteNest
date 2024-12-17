@@ -3,28 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Firebase Authentication with Firestore</title>
+  <title>SiteNest | SignIn</title>
+  <link rel="icon" href="./Site Nest.svg" type="image/x-icon">
+  <link rel="stylesheet" href="./Create_Account.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
-  <h1>Sign Up</h1>
-  <form>
-    <label for="name">Username:</label>
-    <input type="text" id="name" placeholder="Enter your username" required><br><br>
+  <div class="container">
+    <div>
+      <img src="./account.svg" alt="login-pic"/>
+    </div>
+    <form>
+      <h1>Sign Up</h1>
+      <label for="name">Username:</label>
+      <input type="text" id="name" placeholder="Enter your username" required><br><br>
 
-    <label for="user_email">Email:</label>
-    <input type="email" id="user_email" placeholder="Enter your email" required><br><br>
+      <label for="user_email">Email:</label>
+      <input type="email" id="user_email" placeholder="Enter your email" required><br><br>
 
-    <label for="passcode">Password:</label>
-    <input type="text" id="passcode" placeholder="Enter your password" required><br><br>
+      <label for="passcode">Password:</label>
+      <input type="text" id="passcode" placeholder="Enter your password" required><br><br>
 
-    <button id="sign_up">Sign Up</button>
-    <button type="button" id="sign_up-google">Sign Up with Google</button>
-  </form>
-  <p>
-    Already have an account? <span><a href="./Login.html">Login</a></span>
-  </p>
+      <button id="sign_up">Sign Up</button>
+      <button type="button" id="sign_up-google">Sign Up with Google</button>
+    </form>
+    <p>
+      Already have an account? <span><a href="./Login.html">Login</a></span>
+    </p>
 
+  </div>
+  
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
