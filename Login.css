@@ -1,0 +1,138 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0 auto;
+    height: 100vh;
+    font-family: Aquatico;
+    background: url(/Animated\ Shape.svg);
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+input{
+    outline: none;
+    border: none;
+    padding: 0.7rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    width: 15.5rem;
+}
+h1{
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+}
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 20rem;
+    padding: 1rem 0.5rem;
+    height: 32rem;
+    border-radius: 5px;
+    margin: 1rem;
+    background-color: transparent;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 10px #222;
+}
+p{
+    font-size: 0.75rem;
+}
+span{
+    color: #006666;
+}
+
+button{
+    outline: none;
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    width: 15.5rem;
+    margin: 1rem 0;
+}
+button:first-of-type{
+    color: #fff;
+    background: #006666;
+}
+
+button:first-of-type:hover{
+    color: #006666;
+    background: #fff;
+}
+a:hover{
+    color: #fff;
+}
+span img{
+    width: 1rem;
+}
+button:last-of-type{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+.logged {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #007bff;
+    position: relative;
+    z-index: -1;
+    bottom: 0.55rem;
+    left: 0.5rem;
+}
+
+label {
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+    margin-top: 1rem;
+}
+
+label:hover {
+    color: #007bff;
+}
+
+/* input[type="checkbox"]:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+} */
+.empty{
+    width: 2.2rem;
+    height: 1.2rem;
+    border-radius: 10px;
+    background-color: white;
+    position: relative;
+    top: 1.7rem;
+    border: 2px solid #222;
+}
+.log-toggle{
+    width: 1.2rem;
+    height: 1.1rem;
+    background-color: #007bff;
+    border-radius: 50%;
+    position: relative;
+    top: 0.56rem;
+    z-index: 1;
+    transition: left linear 0.5s;
+}
+
+#still_log:checked ~ .log-toggle {
+    left: 1rem;
+}

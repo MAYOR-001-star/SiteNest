@@ -4,21 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
-  <title>SiteNest | SignIn</title>
+  <title>SiteNest | Sign In</title>
   <link rel="icon" href="./Site Nest.svg" type="image/x-icon">
+  <link rel="stylesheet" href="./Login.css">
 </head>
 <body>
-  <h1>SignIn Page</h1>
-  <form>
-    <input type="text" id="name" placeholder="Username" /><br>
-    <input type="text" id="passcode" placeholder="At most 6 characters and 1 special character" /><br>
-    <button id="sign_in" type="button">Login</button><br>
-    <input type="checkbox" id="still_log" name="logged in"/><label for="logged in">keep me logged in</label>
-    <button type="button" id="sign_in-google">Sign In with Google</button>
-  </form>
-  <p>
-    Don't have an account? <span><a href="./Create_Account.html">create account</a></span>
-  </p>
+  <div class="container">
+    <form>
+      <h1>Sign In</h1>
+      <input type="text" id="name" placeholder="Username" /><br>
+      <input type="text" id="passcode" placeholder="At most 6 characters and 1 special character" /><br>
+      <button id="sign_in" type="button">Sign In</button><br>
+      <div class="logged">
+        <div>
+          <div class="empty"></div>
+          <div class="log-toggle"></div>
+          <input type="checkbox" id="still_log" name="logged_in" />
+        </div>
+        
+        <label for="still_log">Keep me logged in</label>
+      </div>      
+
+      <p style="margin: 1rem 0;">or login with</p>
+      <button type="button" id="sign_in-google">
+        <span><img src="./google.svg" alt="google-icon"/></span> Google
+      </button>
+      <p>
+        Don't have an account? <span><a href="./Create_Account.html">create account</a></span>
+      </p>
+    </form>
+    
+  </div>
+  
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
@@ -119,6 +136,17 @@
             window.location.href = "./SiteNest.html"
         }
     }
+
+    const checkbox = document.getElementById("still_log");
+    checkbox.addEventListener("change", function () {
+      const logToggle = document.querySelector(".log-toggle");
+      if (checkbox.checked) {
+        logToggle.style.left = "1rem";
+      } else {
+        logToggle.style.left = "0";
+      }
+    });
+
     sign_inBtn.addEventListener("click", allowUser)
     sign_inGoogleBtn.addEventListener("click", googleAllowUser);
   </script>

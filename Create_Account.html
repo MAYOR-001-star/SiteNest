@@ -3,34 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SiteNest | SignIn</title>
+  <title>SiteNest | SignUp</title>
   <link rel="icon" href="./Site Nest.svg" type="image/x-icon">
   <link rel="stylesheet" href="./Create_Account.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
   <div class="container">
-    <div>
-      <img src="./account.svg" alt="login-pic"/>
-    </div>
     <form>
       <h1>Sign Up</h1>
-      <label for="name">Username:</label>
-      <input type="text" id="name" placeholder="Enter your username" required><br><br>
+      <input type="text" id="name" placeholder="Username" required><br>
 
-      <label for="user_email">Email:</label>
-      <input type="email" id="user_email" placeholder="Enter your email" required><br><br>
+      <input type="email" id="user_email" placeholder="Email" required><br>
 
-      <label for="passcode">Password:</label>
-      <input type="text" id="passcode" placeholder="Enter your password" required><br><br>
+      <input type="password" id="passcode" placeholder="Enter your password" required><br>
 
       <button id="sign_up">Sign Up</button>
-      <button type="button" id="sign_up-google">Sign Up with Google</button>
-    </form>
-    <p>
-      Already have an account? <span><a href="./Login.html">Login</a></span>
-    </p>
 
+      <p>or login with</p>
+      
+      <button type="button" id="sign_up-google">
+        <span><img src="./google.svg" alt="google-icon"/></span> Google
+      </button>
+      <p>
+        Already have an account? <span><a href="./Login.html">Login</a></span>
+      </p>
+    </form>
   </div>
   
   <script type="module">

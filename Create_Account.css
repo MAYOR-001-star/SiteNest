@@ -1,14 +1,83 @@
-.container{
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
     margin: 0 auto;
-    width: 45rem;
-    height: 45rem;
-    /* background-color: red; */
+    height: 100vh;
+    font-family: Aquatico;
+    background: url(/Animated\ Shape.svg);
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+form{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    width: 20rem;
+    padding: 1rem 0.5rem;
+    height: 33rem;
+    border-radius: 5px;
+    margin: 1rem;
+    background-color: transparent;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 10px #222;
 }
-form{
-    width: 50%;
-    height: 100%;
-    background: white;
+input{
+    outline: none;
+    border: none;
+    padding: 0.7rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    width: 15.5rem;
+    margin-bottom: 1rem;
 }
+button{
+    outline: none;
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    width: 15.5rem;
+    margin: 1rem 0;
+}
+button:first-of-type{
+    color: #fff;
+    background: #006666;
+}
+h1{
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+}
+p{
+    font-size: 0.85rem;
+}
+span{
+    color: #006666;
+}
+
+button:first-of-type:hover{
+    color: #006666;
+    background: #fff;
+}
+a:hover{
+    color: #fff;
+}
+span img{
+    width: 1rem;
+}
+button:last-of-type{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+
+
