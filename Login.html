@@ -16,7 +16,7 @@
       <input type="text" id="passcode" placeholder="At most 6 characters and 1 special character" /><br>
       <button id="sign_in" type="button">Sign In</button><br>
       <div class="logged">
-        <div>
+        <div class="clicker">
           <div class="empty"></div>
           <div class="log-toggle"></div>
           <input type="checkbox" id="still_log" name="logged_in" />
@@ -137,15 +137,29 @@
         }
     }
 
-    const checkbox = document.getElementById("still_log");
-    checkbox.addEventListener("change", function () {
-      const logToggle = document.querySelector(".log-toggle");
-      if (checkbox.checked) {
-        logToggle.style.left = "1rem";
-      } else {
-        logToggle.style.left = "0";
-      }
-    });
+const checkbox = document.getElementById("still_log");
+const logToggle = document.querySelector(".log-toggle");
+const clicker = document.querySelector(".clicker");
+
+// Update toggle position based on checkbox state
+checkbox.addEventListener("change", function () {
+  if (checkbox.checked) {
+    logToggle.style.left = "1rem";
+  } else {
+    logToggle.style.left = "0";
+  }
+});
+
+// Toggle checkbox state when the clicker is clicked
+clicker.addEventListener("click", () => {
+  checkbox.checked = !checkbox.checked; 
+  if (checkbox.checked) {
+    logToggle.style.left = "1rem";
+  } else {
+    logToggle.style.left = "0";
+  }
+});
+
 
     sign_inBtn.addEventListener("click", allowUser)
     sign_inGoogleBtn.addEventListener("click", googleAllowUser);
