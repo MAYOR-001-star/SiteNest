@@ -140,6 +140,7 @@
 const checkbox = document.getElementById("still_log");
 const logToggle = document.querySelector(".log-toggle");
 const clicker = document.querySelector(".clicker");
+const emptyBar = document.querySelector(".empty");
 
 // Update toggle position based on checkbox state
 checkbox.addEventListener("change", function () {
@@ -155,8 +156,12 @@ clicker.addEventListener("click", () => {
   checkbox.checked = !checkbox.checked; 
   if (checkbox.checked) {
     logToggle.style.left = "1rem";
+    emptyBar.style.backgroundColor = "#007bff";
+    logToggle.style.backgroundColor = "white";
   } else {
     logToggle.style.left = "0";
+    emptyBar.style.backgroundColor = "white";
+    logToggle.style.backgroundColor = "#007bff";
   }
 });
 
