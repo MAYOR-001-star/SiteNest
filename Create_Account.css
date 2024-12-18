@@ -8,7 +8,7 @@ body{
     margin: 0 auto;
     height: 100vh;
     font-family: Aquatico;
-    background: url(/Animated\ Shape.svg);
+    background: url(./Animated\ Shape.svg);
 }
 .container{
     display: flex;
