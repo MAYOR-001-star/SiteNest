@@ -4,10 +4,15 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'Aquatico';
+    src: url('/Aquatico-Regular.otf') format('opentype');
+}
+
 body{
     margin: 0 auto;
     height: 100vh;
-    font-family: Aquatico;
+    font-family: 'Aquatico', sans-serif;
     background: url("./Animated Shape.svg");
 }
 .container{
