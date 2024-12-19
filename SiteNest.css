@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Aquatico';
+    src: url('./Aquatico-Regular.woff2') format('woff2'),
+        url('./Aquatico-Regular.woff') format('woff'),
+        url('./Aquatico-Regular.otf') format('opentype');
+}
+
+
+body{
+    margin: 0 auto;
+    height: 100vh;
+    font-family: 'Aquatico', sans-serif;
+    background: url("./Animated Shape.svg") no-repeat center center;
+    background-size: cover;
+}

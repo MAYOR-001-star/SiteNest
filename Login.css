@@ -6,8 +6,11 @@
 
 @font-face {
     font-family: 'Aquatico';
-    src: url('./Aquatico-Regular.otf') format('opentype');
+    src: url('./Aquatico-Regular.woff2') format('woff2'),
+        url('./Aquatico-Regular.woff') format('woff'),
+        url('./Aquatico-Regular.otf') format('opentype');
 }
+
 
 body{
     margin: 0 auto;
@@ -41,7 +44,7 @@ form{
     align-items: center;
     flex-direction: column;
     width: 20rem;
-    padding: 1rem 0.5rem;
+    padding: 1.5rem 0.5rem;
     height: 32rem;
     border-radius: 5px;
     margin: 1rem;
