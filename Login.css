@@ -6,14 +6,15 @@
 
 @font-face {
     font-family: 'Aquatico';
-    src: url('/Aquatico-Regular.otf') format('opentype');
+    src: url('./Aquatico-Regular.otf') format('opentype');
 }
 
 body{
     margin: 0 auto;
     height: 100vh;
     font-family: 'Aquatico', sans-serif;
-    background: url("./Animated Shape.svg");
+    background: url("./Animated Shape.svg") no-repeat center center;
+    background-size: cover;
 }
 .container{
     display: flex;
