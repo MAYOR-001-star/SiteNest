@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -11,11 +11,196 @@
         url('./Aquatico-Regular.otf') format('opentype');
 }
 
-
-body{
-    margin: 0 auto;
-    height: 100vh;
-    font-family: 'Aquatico', sans-serif;
-    background: url("./Animated Shape.svg") no-repeat center center;
-    background-size: cover;
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serifato, sans-serif;
 }
+
+/* From Uiverse.io by Smit-Prajapati */ 
+.loader {
+    --size: 250px;
+    --duration: 2s;
+    --logo-color: grey;
+    height: var(--size);
+    aspect-ratio: 1;
+    position: relative;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.loader .box {
+    position: absolute;
+    background: rgba(245, 245, 220, 0.15);
+    /* background: var(--background); */
+    border-radius: 50%;
+    border-top: 1px solid rgba(34, 139, 34, 1);
+    box-shadow: rgba(34, 139, 34, 0.3) 0px 10px 10px -0px;
+    backdrop-filter: blur(5px);
+    animation: ripple var(--duration) infinite ease-in-out;
+}
+
+.loader .box:nth-child(1) {
+    inset: 40%;
+    z-index: 99;
+}
+
+.loader .box:nth-child(2) {
+    inset: 30%;
+    z-index: 98;
+    border-color: rgba(34, 139, 34, 0.8);
+    animation-delay: 0.2s;
+}
+
+.loader .box:nth-child(3) {
+    inset: 20%;
+    z-index: 97;
+    border-color: rgba(34, 139, 34, 0.6);
+    animation-delay: 0.4s;
+}
+
+.loader .logo {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    inset: 0;
+    padding: 30%;
+}
+
+.loader .logo svg {
+    fill: var(--logo-color);
+    width: 100%;
+    animation: color-change var(--duration) infinite ease-in-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        box-shadow: rgba(34, 139, 34, 0.3) 0px 10px 10px -0px;
+    }
+    50% {
+        transform: scale(1.3);
+        box-shadow: rgba(34, 139, 34, 0.3) 0px 30px 20px -0px;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: rgba(34, 139, 34, 0.3) 0px 10px 10px -0px;
+    }
+}
+
+@keyframes color-change {
+    0% {
+        fill: var(--logo-color);
+    }
+    50% {
+        fill: white;
+    }
+    100% {
+        fill: var(--logo-color);
+    }
+}
+
+/* Fade Out Animation */
+.fadeOut {
+    animation: vanish 2s forwards;
+}
+
+@keyframes vanish {
+    0%, 50% {
+        opacity: 1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        visibility: visible;
+    }
+    100% {
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        visibility: hidden;
+    }
+}
+
+/* Fade In Animation */
+.fadeIn {
+    animation: appear 2s forwards;
+}
+
+@keyframes appear {
+    0%, 50% {
+        opacity: 0;
+        visibility: hidden;
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #94c2ff;
+    box-shadow: 1px 17px 18px -10px rgb(148, 194, 255);
+    position: relative;
+    z-index: 999;
+}
+.header img{
+    width: 2rem;
+    margin-right: 0.5rem;
+}
+#close-btn{
+    display: none;
+}
+#userlink{
+    font-style: italic;
+}
+.content{
+    padding: 3rem;
+}
+.greetings-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4rem 0 1rem 0;
+    padding: 0 1rem;
+}
+textarea{
+    margin: 1rem 0;
+}
+textarea,input{
+    border: 1px groove #222;
+    outline: none;
+    padding: 5px;
+    border-radius: 5px;
+}
+textarea:focus, input:focus{
+    border: 3px groove #2d6a4f;
+}
+.text-checker{
+    width: 100%;
+    text-align: end;
+}
+
+/* button{
+    outline: none;
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    width: 15.5rem;
+    margin: 1rem 0;
+    color: #fff;
+    background: #006666;
+    border: 1px groove #006666;
+}
+
+button:hover{
+    color: #006666;
+    background: #fff;
+} */
