@@ -49,7 +49,7 @@
       <p id="userlink"></p>
       <button id="sign_out" type="button">Logout</button><br>
     </div>
-    <h1>Save And Access Your Saved Content <span class="changer">Anytime</span></h1>
+    <p>Save And Access Your Saved Content <span class="changer">Anytime</span></p>
     <div class="content">
       <form id="blog-form">
         <input type="text" id="blog-title" placeholder="Title" required />
@@ -62,17 +62,21 @@
 
       <div id="bloggg">
         <h2>Your Blogs</h2>
-        <ul id="blog-list"></ul>
+        <div id="blog-list">
+          <!-- <div class="list">
+            <p>hello</p>
+            <p>Here comes your blog</p>
+          </div> -->
+        </div>
       </div>
       
-
+    </div>
       <p>
         Don't have an account? <span><a href="./Create_Account.html">create account</a></span>
       </p>
       <p>
         Already have an account? <span><a href="./Login.html">login</a></span>
       </p>
-    </div>
   </div>
   
 
@@ -142,9 +146,11 @@
 
       querySnapshot.forEach((doc) => {
         const blog = doc.data();
-        const li = document.createElement("li");
-        li.textContent = `${blog.title}: ${blog.content}`;
-        blogList.appendChild(li);
+        const div = document.createElement("div");
+        const button = document.createElement("button")
+        div.innerHTML = `<p>${blog.title}</p><span></span> <p>${blog.content}</p>`;
+        div.classList.add("list")
+        blogList.appendChild(div);
       });
     }
 
@@ -199,7 +205,7 @@
       } else {
         userlink.textContent = `Welcome, ${currentUser.displayName || currentUser.username}`;
         blogForm.style.display = "block";
-        document.querySelector("#bloggg").style.display = "block"
+        document.querySelector("#bloggg").style.display = "flex"
         sign_outBtn.style.display = "block"
         await fetchAndDisplayBlogs();
       }
@@ -211,7 +217,9 @@
     function blogCharacter(){
       totalCharacter.innerHTML = blogContent.maxLength - blogContent.value.length
       if(totalCharacter.textContent <= 10){
-        document.querySelector(".text-checker").style.color = "red"
+        document.querySelector(".text-checker").style.color = "red";
+      }else{
+        document.querySelector(".text-checker").style.color = "black";
       }
     }
     
@@ -225,8 +233,6 @@
         document.querySelector("#blog-btn").disabled = true;  
       }
     })
-
-    
 
   </script>
 </body>

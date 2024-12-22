@@ -15,7 +15,7 @@ body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serifato, sans-serif;
 }
 
-/* From Uiverse.io by Smit-Prajapati */ 
+
 .loader {
     --size: 250px;
     --duration: 2s;
@@ -160,9 +160,9 @@ body {
 #userlink{
     font-style: italic;
 }
-.content{
+/* .content{
     padding: 3rem;
-}
+} */
 .greetings-container{
     display: flex;
     justify-content: space-between;
@@ -184,16 +184,18 @@ textarea:focus, input:focus{
 }
 .text-checker{
     width: 100%;
-    text-align: end;
+    display: flex;
+    justify-content: end;
+    margin-top: -10px;
 }
 
-/* button{
+button{
     outline: none;
     border: none;
     padding: 0.5rem;
     font-size: 1rem;
     border-radius: 25px;
-    width: 15.5rem;
+    width: 8rem;
     margin: 1rem 0;
     color: #fff;
     background: #006666;
@@ -203,4 +205,41 @@ textarea:focus, input:focus{
 button:hover{
     color: #006666;
     background: #fff;
-} */
+}
+
+p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.changer{
+    margin-left: 0.5rem;
+    font-weight: 900;
+}
+
+.total-character-left{
+    margin-right: 0.5rem;
+}
+
+#bloggg{
+    margin-top: 2rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#blog-form{
+    margin: 2rem;
+}
+#blog-list{
+    margin: 1rem;
+    padding: 1rem;
+}
+.list{
+    list-style: none;
+    background-color: red;
+    padding: 0.35rem;
+    margin: 1rem;
+}
+.list p{
+    margin: 1rem 0;
+}
