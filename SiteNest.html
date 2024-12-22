@@ -49,7 +49,7 @@
       <p id="userlink"></p>
       <button id="sign_out" type="button">Logout</button><br>
     </div>
-    <p>Save And Access Your Saved Content <span class="changer">Anytime</span></p>
+    <p>Save And Access Your Saved Content <span class="changer">Anywhere</span></p>
     <div class="content">
       <form id="blog-form">
         <input type="text" id="blog-title" placeholder="Title" required />
@@ -62,21 +62,18 @@
 
       <div id="bloggg">
         <h2>Your Blogs</h2>
-        <div id="blog-list">
-          <!-- <div class="list">
-            <p>hello</p>
-            <p>Here comes your blog</p>
-          </div> -->
-        </div>
+        <div id="blog-list"></div>
       </div>
       
     </div>
+    <div style="margin: 3rem 0;">
       <p>
         Don't have an account? <span><a href="./Create_Account.html">create account</a></span>
       </p>
       <p>
         Already have an account? <span><a href="./Login.html">login</a></span>
       </p>
+    </div>
   </div>
   
 
@@ -146,11 +143,32 @@
 
       querySnapshot.forEach((doc) => {
         const blog = doc.data();
-        const div = document.createElement("div");
-        const button = document.createElement("button")
-        div.innerHTML = `<p>${blog.title}</p><span></span> <p>${blog.content}</p>`;
-        div.classList.add("list")
-        blogList.appendChild(div);
+        const divHeader = document.createElement("div");
+        const openContainer = document.createElement("div")
+        const titleParagraph = document.createElement("p")
+        titleParagraph.classList.add("title-paragraph")
+        titleParagraph.textContent = `${blog.title}`
+        // divHeader.innerHTML = `<p>${blog.title}</p><span></span> <p>${blog.content}</p>`;
+        openContainer.innerHTML = `<img src="./lock.svg" alt="icon" class="blog-padlock"/>`;
+        divHeader.classList.add("list")
+        divHeader.appendChild(titleParagraph);
+        divHeader.appendChild(openContainer);
+        const divContent = document.createElement("div");
+        const blogParagraph = document.createElement("p")
+        blogParagraph.classList.add("blog-paragraph")
+        blogParagraph.textContent = `${blog.content}`
+        divContent.appendChild(blogParagraph)
+        const buttonContainer = document.createElement("div")
+        buttonContainer.classList.add("buttonss")
+        divContent.appendChild(buttonContainer)
+        const editButton = document.createElement("button")
+        editButton.textContent = "Edit"
+        const deleteButton = document.createElement("button")
+        deleteButton.textContent = "Delete"
+        buttonContainer.appendChild(editButton)
+        buttonContainer.appendChild(deleteButton)
+        blogList.appendChild(divHeader);
+        blogList.appendChild(divContent);
       });
     }
 

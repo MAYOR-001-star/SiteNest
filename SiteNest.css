@@ -167,7 +167,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 4rem 0 1rem 0;
+    margin: 2rem 0 1rem 0;
     padding: 0 1rem;
 }
 textarea{
@@ -211,6 +211,8 @@ p{
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    width: 100%;
 }
 .changer{
     margin-left: 0.5rem;
@@ -222,7 +224,7 @@ p{
 }
 
 #bloggg{
-    margin-top: 2rem;
+    margin: 2rem;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -233,13 +235,30 @@ p{
 #blog-list{
     margin: 1rem;
     padding: 1rem;
+    width: 100%;
 }
 .list{
-    list-style: none;
-    background-color: red;
-    padding: 0.35rem;
-    margin: 1rem;
-}
-.list p{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #94c2ff;
     margin: 1rem 0;
+    padding: 1rem;
+}
+.blog-padlock{
+    width: 2rem;
+}
+
+.buttonss{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.blog-paragraph{
+    margin: 0 auto; 
+    width: fit-content;
+    overflow-wrap: anywhere;
+    line-height: 2rem;
 }
