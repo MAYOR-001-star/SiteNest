@@ -215,7 +215,7 @@ p{
     width: 100%;
 }
 .changer{
-    margin-left: 0.5rem;
+    margin-left: 0.3rem;
     font-weight: 900;
 }
 
@@ -242,7 +242,7 @@ p{
     justify-content: space-between;
     align-items: center;
     background-color: #94c2ff;
-    margin: 1rem 0;
+    border-radius: 5px 5px 0 0;
     padding: 1rem;
 }
 .blog-padlock{
@@ -254,11 +254,19 @@ p{
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
+    margin-bottom: 3rem;
 }
 
 .blog-paragraph{
-    margin: 0 auto; 
+    margin: 0 auto 1rem auto; 
     width: fit-content;
     overflow-wrap: anywhere;
     line-height: 2rem;
+    padding: 1rem;
+    border-radius: 0 0 5px 5px;
+    background-color: rgba(148, 194, 255, 0.2);
+}
+
+.btns{
+    width: 5rem;
 }

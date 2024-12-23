@@ -160,13 +160,15 @@
         divContent.appendChild(blogParagraph)
         const buttonContainer = document.createElement("div")
         buttonContainer.classList.add("buttonss")
-        divContent.appendChild(buttonContainer)
         const editButton = document.createElement("button")
         editButton.textContent = "Edit"
         const deleteButton = document.createElement("button")
         deleteButton.textContent = "Delete"
+        deleteButton.classList.add("btns")
+        editButton.classList.add("btns")
         buttonContainer.appendChild(editButton)
         buttonContainer.appendChild(deleteButton)
+        divContent.appendChild(buttonContainer)
         blogList.appendChild(divHeader);
         blogList.appendChild(divContent);
       });
