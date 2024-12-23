@@ -7,7 +7,7 @@ The Blog Management System is a web-based platform where users can log in, creat
 
 ### 1. User Authentication
 - Users can log in and out using persistent sessions.
-- The login state is managed via `localStorage` or `sessionStorage`.
+- The login and the account creation state is managed via `localStorage` or `sessionStorage`.
 
 ### 2. Blog Management
 - Users can create blogs by providing a title and content.
