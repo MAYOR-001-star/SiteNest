@@ -113,32 +113,32 @@
     })
 
     function changer(){
-  const changerContainer = document.querySelector(".changer");
-  const changerContent = ["Anywhere", "Anytime", "Anyday", "Anyhow"];
+      const changerContainer = document.querySelector(".changer");
+      const changerContent = ["Anywhere", "Anytime", "Anyday", "Anyhow"];
 
-  let characterchanger = 0;
-  let changerContentSample = 0;
+      let characterchanger = 0;
+      let changerContentSample = 0;
 
-  function update(){
-    changerContainer.textContent = changerContent[changerContentSample].slice(0, characterchanger);
+      function update(){
+        changerContainer.textContent = changerContent[changerContentSample].slice(0, characterchanger);
 
-    characterchanger++;
+        characterchanger++;
 
-    if(characterchanger === changerContent[changerContentSample].length){
-      characterchanger = 0;
-      changerContentSample++;
+        if(characterchanger === changerContent[changerContentSample].length){
+          characterchanger = 0;
+          changerContentSample++;
+        }
+
+        if(changerContentSample >= changerContent.length){
+          characterchanger = 0;
+          changerContentSample = 0;
+        }
+      }
+
+      setInterval(update, 400);
     }
 
-    if(changerContentSample >= changerContent.length){
-      characterchanger = 0;
-      changerContentSample = 0;
-    }
-  }
-
-  setInterval(update, 400);
-}
-
-changer();
+    changer();
 
 
     let currentUser = null;
