@@ -104,6 +104,7 @@
     const loader = document.querySelector(".loader");
     const container = document.querySelector(".container");
     const totalCharacter = document.querySelector(".total-character-left")
+    
 
     
     window.addEventListener("load", ()=>{
@@ -111,6 +112,33 @@
       container.classList.add("fadeIn")
     })
 
+    function changer(){
+  const changerContainer = document.querySelector(".changer");
+  const changerContent = ["Anywhere", "Anytime", "Anyday", "Anyhow"];
+
+  let characterchanger = 0;
+  let changerContentSample = 0;
+
+  function update(){
+    changerContainer.textContent = changerContent[changerContentSample].slice(0, characterchanger);
+
+    characterchanger++;
+
+    if(characterchanger === changerContent[changerContentSample].length){
+      characterchanger = 0;
+      changerContentSample++;
+    }
+
+    if(changerContentSample >= changerContent.length){
+      characterchanger = 0;
+      changerContentSample = 0;
+    }
+  }
+
+  setInterval(update, 400);
+}
+
+changer();
 
 
     let currentUser = null;
