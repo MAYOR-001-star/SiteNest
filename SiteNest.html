@@ -143,35 +143,62 @@
 
       querySnapshot.forEach((doc) => {
         const blog = doc.data();
-        const divHeader = document.createElement("div");
-        const openContainer = document.createElement("div")
-        const titleParagraph = document.createElement("p")
-        titleParagraph.classList.add("title-paragraph")
-        titleParagraph.textContent = `${blog.title}`
-        // divHeader.innerHTML = `<p>${blog.title}</p><span></span> <p>${blog.content}</p>`;
-        openContainer.innerHTML = `<img src="./lock.svg" alt="icon" class="blog-padlock"/>`;
-        divHeader.classList.add("list")
-        divHeader.appendChild(titleParagraph);
-        divHeader.appendChild(openContainer);
-        const divContent = document.createElement("div");
-        const blogParagraph = document.createElement("p")
-        blogParagraph.classList.add("blog-paragraph")
-        blogParagraph.textContent = `${blog.content}`
-        divContent.appendChild(blogParagraph)
-        const buttonContainer = document.createElement("div")
-        buttonContainer.classList.add("buttonss")
-        const editButton = document.createElement("button")
-        editButton.textContent = "Edit"
-        const deleteButton = document.createElement("button")
-        deleteButton.textContent = "Delete"
-        deleteButton.classList.add("btns")
-        editButton.classList.add("btns")
-        buttonContainer.appendChild(editButton)
-        buttonContainer.appendChild(deleteButton)
-        divContent.appendChild(buttonContainer)
+
+        // Create the blog post structure
+        const divHeader = createHeader(blog.title);
+        const divContent = createContent(blog.content);
+
+        // Append elements to the blog list
         blogList.appendChild(divHeader);
         blogList.appendChild(divContent);
       });
+
+      // Function to create header (title + lock icon)
+      function createHeader(title) {
+        const divHeader = document.createElement("div");
+        divHeader.classList.add("list");
+
+        const titleParagraph = document.createElement("p");
+        titleParagraph.classList.add("title-paragraph");
+        titleParagraph.textContent = title;
+
+        const openContainer = document.createElement("div");
+        const lockIcon = document.createElement("img");
+        lockIcon.src = "./lock.svg";
+        lockIcon.alt = "icon";
+        lockIcon.classList.add("blog-padlock");
+        openContainer.appendChild(lockIcon);
+
+        divHeader.appendChild(titleParagraph);
+        divHeader.appendChild(openContainer);
+        return divHeader;
+      }
+
+      // Function to create content (blog content + buttons)
+      function createContent(content) {
+        const divContent = document.createElement("div");
+
+        const blogParagraph = document.createElement("p");
+        blogParagraph.classList.add("blog-paragraph");
+        blogParagraph.textContent = content;
+
+        const buttonContainer = document.createElement("div");
+        buttonContainer.classList.add("buttonss");
+
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.classList.add("btns");
+        editButton.classList.add("btns");
+
+        buttonContainer.appendChild(editButton);
+        buttonContainer.appendChild(deleteButton);
+        divContent.appendChild(blogParagraph);
+        divContent.appendChild(buttonContainer);
+        
+        return divContent;
+      }
     }
 
     // Add blog with duplicate title check
