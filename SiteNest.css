@@ -255,9 +255,8 @@ p{
     margin-bottom: 3rem;
 }
 
-.blog-paragraph{
+.blog-paragraph, .title-paragraph{
     margin: 0 auto 1rem auto; 
-    width: fit-content;
     overflow-wrap: anywhere;
     line-height: 2rem;
     padding: 1rem;
@@ -265,6 +264,6 @@ p{
     background-color: rgba(148, 194, 255, 0.2);
 }
 
-.btns{
+.editBtn, .deleteBtn{
     width: 5rem;
 }
