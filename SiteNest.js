@@ -306,12 +306,12 @@ window.addEventListener("load", () => {
   loader.classList.add("fadeOut");
   container.classList.add("fadeIn");
   login();  // Check login status on load
-  if (isEditing) {
-    document.querySelector("#blog-btn").textContent = "Update blog"
-  } else {
-    document.querySelector("#blog-btn").textContent = "Add blog"
-  }
-  fetchAndDisplayBlogs();  // Fetch and display blogs on page load
+  // if (isEditing) {
+  //   document.querySelector("#blog-btn").textContent = "Update blog"
+  // } else {
+  //   document.querySelector("#blog-btn").textContent = "Add blog"
+  // }
+  // fetchAndDisplayBlogs();  // Fetch and display blogs on page load
 });
 
 // Login function to determine if user is logged in
@@ -323,7 +323,7 @@ function login() {
   }
 
   if (currentUser && currentUser.email) {
-    userlink.textContent = `Welcome, ${currentUser.email}`;
+    userlink.textContent = `Welcome, ${currentUser.displayName || currentUser.username}`;
   } else {
     window.location.href = "./Login.html";
   }
@@ -351,7 +351,7 @@ async function fetchAndDisplayBlogs() {
     const blogId = doc.id;  // Get blog document ID
 
     // Create the blog post structure
-    const divHeader = createHeader(blog.title, blogId);
+    const divHeader = createHeader(blog.title);
     const divContent = createContent(blog.title, blog.content, blogId);
 
     // Append elements to the blog list
@@ -360,7 +360,7 @@ async function fetchAndDisplayBlogs() {
   });
 
   // Function to create header (title + lock icon)
-  function createHeader(title, blogId) {
+  function createHeader(title) {
     const divHeader = document.createElement("div");
     divHeader.classList.add("list");
 
@@ -520,7 +520,7 @@ function changer() {
       changerContainer.textContent = changerContent[changerContentSample].slice(0, characterchanger);
       characterchanger++;
 
-      if (characterchanger === changerContent[changerContentSample].length) {
+      if (characterchanger > changerContent[changerContentSample].length) {
           characterchanger = 0;
           changerContentSample++;
       }

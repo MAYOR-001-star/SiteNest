@@ -24,6 +24,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
     const username_ = document.querySelector("#name");
     const sign_inGoogleBtn = document.querySelector("#sign_in-google");
     const sign_inBtn = document.querySelector("#sign_in");
+    const usernameSignal = document.querySelector("#username-signal")
+    const passwordSignal = document.querySelector("#password-signal") 
 
     function decpass(passcoded) {
   // Hash the entered password and compare with stored hash
@@ -50,8 +52,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
             // Compare the entered password's hash with the stored hash
             if (decpass(storedHashedPassword)) {
                 login(docSnap.data());
+                usernameSignal.style.opacity = 1;
+                passwordSignal.style.opacity = 1;
+
             } else {
                 alert("Incorrect password or username");
+                usernameSignal.style.opacity = 0;
+                passwordSignal.style.opacity = 0;
             }
             } else {
             alert("Account not found");
@@ -82,21 +89,43 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
 
     function loginGoogle(user){
       sessionStorage.setItem("user", JSON.stringify(user))
-      window.location.href = "./SiteNest.html"
+
+      window.location.href = "./SiteNest.html";
     }
 
+    function clearForm(){
+      const usernameField = document.getElementById("username");
+      const passwordField = document.getElementById("password");
+      
+      // Check if elements exist before clearing their values
+      if (usernameField && passwordField) {
+        usernameField.value = "";
+        passwordField.value = "";
+      } else {
+        console.error("Username or password field not found!");
+      }
+    }
+    
     function login(user){
-        let loggedIn = document.querySelector("#still_log").checked;
-        if(!loggedIn){
-            sessionStorage.setItem("user", JSON.stringify(user))
-            window.location.href = "./SiteNest.html"
-        }else{
-            localStorage.setItem("keepLoggedIn", "yes")
-            localStorage.setItem("user", JSON.stringify(user))
-            window.location.href = "./SiteNest.html"
-        }
+      let loggedIn = document.querySelector("#still_log").checked;
+      
+      // Store user data based on login preference
+      if (!loggedIn) {
+        sessionStorage.setItem("user", JSON.stringify(user));
+      } else {
+        localStorage.setItem("keepLoggedIn", "yes");
+        localStorage.setItem("user", JSON.stringify(user));
+      }
+    
+      // Clear the form immediately before navigation
+      clearForm();
+      
+      // Delay page navigation by 1 second
+      setTimeout(() => {
+        window.location.href = "./SiteNest.html";
+      }, 2000);
     }
-
+    
 const checkbox = document.getElementById("still_log");
 const logToggle = document.querySelector(".log-toggle");
 const clicker = document.querySelector(".clicker");
@@ -126,6 +155,6 @@ clicker.addEventListener("click", () => {
 });
 
 
-    sign_inBtn.addEventListener("click", allowUser)
-    sign_inGoogleBtn.addEventListener("click", googleAllowUser);
-  
+
+  sign_inBtn.addEventListener("click", allowUser)
+  sign_inGoogleBtn.addEventListener("click", googleAllowUser);

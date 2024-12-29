@@ -13,7 +13,19 @@
     <form>
       <h1>Sign In</h1>
       <input type="text" id="name" placeholder="Username" /><br>
-      <input type="text" id="passcode" placeholder="At most 6 characters and 1 special character" /><br>
+      <span id="username-signal">
+        <div>
+          <img src="./correct.svg" alt="warning-icon"/>
+        </div>
+        At most 6 characters and 1 special character
+      </span>
+      <input type="text" id="passcode" placeholder="password" /><br>
+      <span id="password-signal">
+        <div>
+          <img src="./correct.svg" alt="warning-icon"/>
+        </div>
+        <p>At most 6 characters and 1 special character</p>
+      </span>
       <button id="sign_in" type="button">Sign In</button><br>
       <div class="logged">
         <div class="clicker">
@@ -21,7 +33,6 @@
           <div class="log-toggle"></div>
           <input type="checkbox" id="still_log" name="logged_in" />
         </div>
-        
         <label for="still_log">Keep me logged in</label>
       </div>      
 
@@ -33,8 +44,20 @@
         Don't have an account? <span><a href="./Create_Account.html">create account</a></span>
       </p>
     </form>
+
     
   </div>
+
+  <div class="status">
+    <div class="status-container">
+      <div class="status-sub-container">
+        <img src="./correct.svg" alt="account-status" class="status-img"/>
+        <p class="status-content">Account created successfully</p>
+      </div>
+  </div>
+  <span class="status-level"></span>
+  </div>
+  
   
 
   <script type="module" src="./Login.js"></script>

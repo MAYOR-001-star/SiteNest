@@ -45,7 +45,7 @@ form{
     flex-direction: column;
     width: 20rem;
     padding: 1.5rem 0.5rem;
-    height: 32rem;
+    height: 34rem;
     border-radius: 5px;
     margin: 1rem;
     background-color: transparent;
@@ -56,7 +56,7 @@ p{
     font-size: 0.75rem;
 }
 span{
-    color: #006666;
+    color: #00ff00;
 }
 
 button{
@@ -137,4 +137,62 @@ label {
 
 #still_log:checked ~ .log-toggle {
     left: 1rem;
+}
+
+#username-signal, #password-signal{
+    font-size: 0.5rem; 
+    display: flex; 
+    opacity: 0;
+    justify-content: center; 
+    align-items: center; 
+    width: 15.5rem; 
+    gap: 5px;
+    margin: -1.3125rem 0 1.25rem 0;
+    transition: opacity 0.5s ease-in;
+}
+#username-signal,#password-signal p{ 
+    text-transform: lowercase;
+    font-size: 0.5rem;
+}
+
+.status{
+    width: 20rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+.status-container{
+    background: white;
+    padding: 0.7rem;
+}
+.status-sub-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.status-level {
+    display: block;
+    height: 0.5rem;
+    width: 100%;
+    background: #00ff00;
+    animation: status 2s ease-out infinite reverse;
+}
+
+@keyframes status {
+    0% {
+        width: 0%;
+    }
+    25% {
+        width: 25%;
+    }
+    50% {
+        width: 50%;
+    }
+    75% {
+        width: 75%;
+    }
+    100% {
+        width: 100%;
+    }
 }
