@@ -26,6 +26,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
     const sign_inBtn = document.querySelector("#sign_in");
     const usernameSignal = document.querySelector("#username-signal")
     const passwordSignal = document.querySelector("#password-signal") 
+    const statusContainer = document.querySelector(".status")
 
     function decpass(passcoded) {
   // Hash the entered password and compare with stored hash
@@ -54,7 +55,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
                 login(docSnap.data());
                 usernameSignal.style.opacity = 1;
                 passwordSignal.style.opacity = 1;
-
+                statusContainer.style.display = "block"
             } else {
                 alert("Incorrect password or username");
                 usernameSignal.style.opacity = 0;
@@ -78,7 +79,11 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
         const docSnap = await getDoc(dbRef);
 
         if (docSnap.exists()) {
-          loginGoogle(user);
+          // setTimeout(()=>{
+            loginGoogle(user);
+          // },3500)
+          
+          // statusContainer.style.display = "block"
         } else {
           alert("Account not found!");
         }
@@ -89,22 +94,10 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
 
     function loginGoogle(user){
       sessionStorage.setItem("user", JSON.stringify(user))
-
       window.location.href = "./SiteNest.html";
     }
 
-    function clearForm(){
-      const usernameField = document.getElementById("username");
-      const passwordField = document.getElementById("password");
-      
-      // Check if elements exist before clearing their values
-      if (usernameField && passwordField) {
-        usernameField.value = "";
-        passwordField.value = "";
-      } else {
-        console.error("Username or password field not found!");
-      }
-    }
+    
     
     function login(user){
       let loggedIn = document.querySelector("#still_log").checked;
@@ -117,13 +110,11 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
         localStorage.setItem("user", JSON.stringify(user));
       }
     
-      // Clear the form immediately before navigation
-      clearForm();
       
       // Delay page navigation by 1 second
       setTimeout(() => {
         window.location.href = "./SiteNest.html";
-      }, 2000);
+      }, 3500);
     }
     
 const checkbox = document.getElementById("still_log");

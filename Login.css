@@ -15,6 +15,7 @@
 body{
     margin: 0 auto;
     height: 100vh;
+    overflow: hidden;
     font-family: 'Aquatico', sans-serif;
     background: url("./Animated Shape.svg") no-repeat center center;
     background-size: cover;
@@ -156,10 +157,30 @@ label {
 }
 
 .status{
+    display: none;
     width: 20rem;
-    position: absolute;
     top: 1rem;
     right: 1rem;
+    position: absolute;
+    animation: move 1.5s linear 1;
+}
+
+@keyframes move {
+    0%{ 
+        right: -20rem;
+    }
+    25%{
+        right: -15rem;
+    }
+    50%{
+        right: -10rem;
+    }
+    75%{
+        right: -5rem;
+    }
+    100%{
+        right: 0rem;
+    }
 }
 .status-container{
     background: white;
@@ -176,7 +197,7 @@ label {
     height: 0.5rem;
     width: 100%;
     background: #00ff00;
-    animation: status 2s ease-out infinite reverse;
+    animation: status 2s ease-out 1 reverse 1.5s;
 }
 
 @keyframes status {
