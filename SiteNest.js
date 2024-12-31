@@ -511,7 +511,7 @@ blogContent.addEventListener("keyup", () => {
 
 function changer() {
   const changerContainer = document.querySelector(".changer");
-  const changerContent = ["Anywhere", "Anytime", "Anyday", "Anyhow"];
+  const changerContent = ["Anywhere.", "Anytime.", "Anyday.", "Anyhow."];
 
   let characterchanger = 0;
   let changerContentSample = 0;

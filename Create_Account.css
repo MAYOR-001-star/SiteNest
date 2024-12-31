@@ -90,3 +90,83 @@ button:last-of-type{
 }
 
 
+#username-signal, #password-signal, #email-signal{
+    font-size: 0.5rem; 
+    display: flex; 
+    opacity: 0;
+    color: red;
+    justify-content: center; 
+    align-items: center; 
+    width: 15.5rem; 
+    gap: 5px;
+    margin: -2rem 0 1.25rem 0;
+    font-weight: 900;
+    transition: opacity 0.5s ease-in;
+}
+#username-signal,#password-signal,#email-signal p{ 
+    text-transform: lowercase;
+    font-size: 0.5rem;
+}
+
+
+.status{
+    display: none;
+    width: 20rem;
+    top: 1rem;
+    right: 1rem;
+    position: absolute;
+    animation: move 1.5s linear 1;
+}
+
+@keyframes move {
+    0%{ 
+        right: -20rem;
+    }
+    25%{
+        right: -15rem;
+    }
+    50%{
+        right: -10rem;
+    }
+    75%{
+        right: -5rem;
+    }
+    100%{
+        right: 0rem;
+    }
+}
+.status-container{
+    background: white;
+    padding: 0.7rem;
+}
+.status-sub-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.status-level {
+    display: block;
+    height: 0.5rem;
+    width: 100%;
+    background: #00ff00;
+    animation: status 2s ease-out 1 reverse 1.5s;
+}
+
+@keyframes status {
+    0% {
+        width: 0%;
+    }
+    25% {
+        width: 25%;
+    }
+    50% {
+        width: 50%;
+    }
+    75% {
+        width: 75%;
+    }
+    100% {
+        width: 100%;
+    }
+}

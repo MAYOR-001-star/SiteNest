@@ -25,6 +25,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
     const username_ = document.querySelector("#name");
     const sign_upBtn = document.querySelector("#sign_up");
     const sign_upGoogleBtn = document.querySelector("#sign_up-google");
+    const statusContainer = document.querySelector(".status")
 
     // Hash password
     function encpass() {
@@ -71,9 +72,14 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
           password: encpass()
         });
 
-        alert("Account successfully created!");
-        // clearForm();
-        // window.location.href = "/login.html";
+        statusContainer.style.display = "block"
+
+        clearForm();
+
+        setTimeout(() => {
+          window.location.href = "./Login.html";
+        }, 3500);
+
       } catch (error) {
         alert(`Error: ${error.message}`);
       }
@@ -124,3 +130,77 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
       email_.value = "";
       username_.value = "";
     }
+
+
+    // checking validation per input
+
+    const usernameRegex = /^[a-zA-Z0-9]{3,15}$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const passwordRegex = /^(?=.*[!@#$%^&*])(?=.*[A-Z])[A-Za-z\d!@#$%^&*]{1,6}$/;
+    
+    const usernameSignal = document.querySelector("#username-signal");
+    const passwordSignal = document.querySelector("#password-signal");
+    const emailSignal = document.querySelector("#email-signal");
+    const emailWarningIcon = document.querySelector("#email-warning-icon");
+    const passwordWarningIcon = document.querySelector("#password-warning-icon");
+    const usernameWarningIcon = document.querySelector("#username-warning-icon");
+    
+    // Username validation
+    username_.addEventListener("focus", () => {
+      usernameSignal.style.opacity = 1;  // Show signal on focus
+    });
+    
+    username_.addEventListener("keyup", () => {
+      if (!usernameRegex.test(username_.value)) {
+        usernameWarningIcon.src = "./error.svg";  // Show error icon
+        usernameSignal.style.color = "red";  // Show red text for invalid input
+      } else {
+        usernameWarningIcon.src = "./correct.svg";  // Show success icon
+        usernameSignal.style.color = "green";  // Show green text for valid input
+      }
+    });
+    
+    username_.addEventListener("blur", () => {
+      usernameSignal.style.opacity = 0;  // Hide signal on blur
+    });
+    
+    // Password validation
+    password_.addEventListener("focus", () => {
+      passwordSignal.style.opacity = 1;  // Show signal on focus
+    });
+    
+    password_.addEventListener("keyup", () => {
+      if (!passwordRegex.test(password_.value)) {
+        passwordWarningIcon.src = "./error.svg";  // Show error icon
+        passwordSignal.style.color = "red";  // Show red text for invalid input
+      } else {
+        passwordWarningIcon.src = "./correct.svg";  // Show success icon
+        passwordSignal.style.color = "green";  // Show green text for valid input
+      }
+    });
+    
+    password_.addEventListener("blur", () => {
+      passwordSignal.style.opacity = 0;  // Hide signal on blur
+    });
+    
+    // Email validation
+    email_.addEventListener("focus", () => {
+      emailSignal.style.opacity = 1;  // Show signal on focus
+    });
+    
+    email_.addEventListener("keyup", () => {
+      if (!emailRegex.test(email_.value)) {
+        emailWarningIcon.src = "./error.svg";  // Show error icon
+        emailSignal.style.color = "red";  // Show red text for invalid input
+      } else {
+        emailWarningIcon.src = "./correct.svg";  // Show success icon
+        emailSignal.style.color = "green";  // Show green text for valid input
+      }
+    });
+    
+    email_.addEventListener("blur", () => {
+      emailSignal.style.opacity = 0;  // Hide signal on blur
+    });
+    
+    
+    

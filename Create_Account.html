@@ -13,10 +13,28 @@
     <form>
       <h1>Sign Up</h1>
       <input type="text" id="name" placeholder="Username" required><br>
+      <span id="username-signal">
+        <div>
+          <img src="./error.svg" alt="warning-icon" id="username-warning-icon"/>
+        </div>
+        At most 6 characters and 1 special character
+      </span>
 
       <input type="email" id="user_email" placeholder="Email" required><br>
+      <span id="email-signal">
+        <div>
+          <img src="./error.svg" alt="warning-icon" id="email-warning-icon"/>
+        </div>
+        At most 6 characters and 1 special character
+      </span>
 
-      <input type="password" id="passcode" placeholder="Enter your password" required><br>
+      <input type="type" id="passcode" placeholder="Enter your password" required><br>
+      <span id="password-signal">
+        <div>
+          <img src="./error.svg" alt="warning-icon" id="password-warning-icon"/>
+        </div>
+        At most 6 characters and 1 special character
+      </span>
 
       <button id="sign_up">Sign Up</button>
 
@@ -29,6 +47,16 @@
         Already have an account? <span><a href="./Login.html">Login</a></span>
       </p>
     </form>
+  </div>
+
+  <div class="status">
+    <div class="status-container">
+      <div class="status-sub-container">
+        <img src="./correct.svg" alt="account-status" class="status-img"/>
+        <p class="status-content">Account created successfully</p>
+      </div>
+    </div>
+    <span class="status-level"></span>
   </div>
   
   <script type="module" src="./Create_Account.js"></script>

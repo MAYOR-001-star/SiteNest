@@ -79,11 +79,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
         const docSnap = await getDoc(dbRef);
 
         if (docSnap.exists()) {
-          // setTimeout(()=>{
-            loginGoogle(user);
-          // },3500)
-          
-          // statusContainer.style.display = "block"
+          loginGoogle(user);
         } else {
           alert("Account not found!");
         }
