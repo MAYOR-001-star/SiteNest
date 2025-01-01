@@ -83,7 +83,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
         const docSnap = await getDoc(dbRef);
 
         if (docSnap.exists()) {
-          alert("Account already exists!");
+          statusImg.src = "./error.svg"
+          statusLevel.style.backgroundColor = "red"
+          statusContent.textContent = "Account already exists!"
+          statusContainer.style.display = "block"
+          setTimeout(()=>{
+            statusContainer.style.display = "none"
+          },3500)
           return;
         }
 
@@ -122,10 +128,26 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
             username: user.displayName,
             photoURL: user.photoURL || ""
           });
-          alert(`Welcome, ${user.displayName}! Your account has been created.`);
-          login(user);
+          statusImg.src = "./correct.svg"
+          statusLevel.style.backgroundColor = "#00ff00"
+          statusContent.textContent = `Welcome, ${user.displayName}! Your account has been created.`
+          statusContainer.style.display = "block"
+          setTimeout(()=>{
+            statusContainer.style.display = "none"
+          },3500)
+          // alert(`Welcome, ${user.displayName}! Your account has been created.`);
+          setInterval(()=>{
+            login(user);
+          },3500)
+          
         } else {
-          alert("Account already exists!");
+          statusImg.src = "./error.svg"
+          statusLevel.style.backgroundColor = "red"
+          statusContent.textContent = "Account already exists!"
+          statusContainer.style.display = "block"
+          setTimeout(()=>{
+            statusContainer.style.display = "none"
+          },3500)
         }
       } catch (error) {
         alert(`Error during Google Sign-In: ${error.message}`);
@@ -177,7 +199,7 @@ username_.addEventListener("keyup", () => {
     usernameSignal.style.color = "red";
   } else {
     usernameWarningIcon.src = "./correct.svg";
-    usernameSignal.style.color = "green";
+    usernameSignal.style.color = "#00ff00";
   }
 });
 
@@ -195,7 +217,7 @@ password_.addEventListener("keyup", () => {
     passwordSignal.style.color = "red";
   } else {
     passwordWarningIcon.src = "./correct.svg";
-    passwordSignal.style.color = "green";
+    passwordSignal.style.color = "#00ff00";
   }
 });
 
@@ -213,7 +235,7 @@ email_.addEventListener("keyup", () => {
     emailSignal.style.color = "red";
   } else {
     emailWarningIcon.src = "./correct.svg";
-    emailSignal.style.color = "green";
+    emailSignal.style.color = "#00ff00";
   }
 });
 
