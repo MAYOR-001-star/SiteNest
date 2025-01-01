@@ -24,9 +24,10 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
     const username_ = document.querySelector("#name");
     const sign_inGoogleBtn = document.querySelector("#sign_in-google");
     const sign_inBtn = document.querySelector("#sign_in");
-    const usernameSignal = document.querySelector("#username-signal")
-    const passwordSignal = document.querySelector("#password-signal") 
     const statusContainer = document.querySelector(".status")
+    const statusContent = document.querySelector(".status-content")
+    const statusImg = document.querySelector(".status-img")
+    const statusLevel = document.querySelector(".status-level")
 
     function decpass(passcoded) {
   // Hash the entered password and compare with stored hash
@@ -40,7 +41,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
 
     async function allowUser() {
         if (emptySpaces(username_.value) || emptySpaces(password_.value)) {
-            alert("All fields are required.");
+          statusImg.src = "./error.svg"
+              statusLevel.style.backgroundColor = "red"
+              statusContent.textContent = "All fields are required."
+              statusContainer.style.display = "block"
+              setTimeout(()=>{
+                statusContainer.style.display = "none"
+              },3500)
             return;
         }
 
@@ -53,19 +60,32 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
             // Compare the entered password's hash with the stored hash
             if (decpass(storedHashedPassword)) {
                 login(docSnap.data());
-                usernameSignal.style.opacity = 1;
-                passwordSignal.style.opacity = 1;
-                statusContainer.style.display = "block"
             } else {
-                alert("Incorrect password or username");
-                usernameSignal.style.opacity = 0;
-                passwordSignal.style.opacity = 0;
+              statusImg.src = "./error.svg"
+              statusLevel.style.backgroundColor = "red"
+              statusContent.textContent = "Incorrect password or username"
+              statusContainer.style.display = "block"
+              setTimeout(()=>{
+                statusContainer.style.display = "none"
+              },3500)
             }
             } else {
-            alert("Account not found");
+              statusImg.src = "./error.svg"
+              statusLevel.style.backgroundColor = "red"
+              statusContent.textContent = "Account not found!"
+              statusContainer.style.display = "block"
+              setTimeout(()=>{
+                statusContainer.style.display = "none"
+              },3500)
             }
         } catch (error) {
-            alert(`Error: ${error.message}`);
+          statusImg.src = "./error.svg"
+          statusLevel.style.backgroundColor = "red"
+          statusContent.textContent = `Error: ${error.message}`
+          statusContainer.style.display = "block"
+          setTimeout(()=>{
+            statusContainer.style.display = "none"
+          },3500)
         }
     }
 
@@ -79,12 +99,34 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
         const docSnap = await getDoc(dbRef);
 
         if (docSnap.exists()) {
-          loginGoogle(user);
+          statusImg.src = "./correct.svg"
+          statusLevel.style.backgroundColor = "#00ff00"
+          statusContent.textContent = `Login Successful`
+          statusContainer.style.display = "block"
+          setTimeout(()=>{
+            statusContainer.style.display = "none"
+          },3500)
+          setTimeout(()=>{
+            loginGoogle(user);
+          },3500)
+          
         } else {
-          alert("Account not found!");
+          statusImg.src = "./error.svg"
+          statusLevel.style.backgroundColor = "red"
+          statusContent.textContent = `Account not found!`
+          statusContainer.style.display = "block"
+          setTimeout(()=>{
+            statusContainer.style.display = "none"
+          },3500)
         }
       } catch (error) {
-        alert(`Error during Google Sign-In: ${error.message}`);
+        statusImg.src = "./error.svg"
+          statusLevel.style.backgroundColor = "red"
+          statusContent.textContent = `Error during Google Sign-In: ${error.message}`
+          statusContainer.style.display = "block"
+          setTimeout(()=>{
+            statusContainer.style.display = "none"
+          },3500)
       }
     }
 
