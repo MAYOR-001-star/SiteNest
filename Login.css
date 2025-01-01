@@ -140,21 +140,6 @@ label {
     left: 1rem;
 }
 
-#username-signal, #password-signal{
-    font-size: 0.5rem; 
-    display: flex; 
-    opacity: 0;
-    justify-content: center; 
-    align-items: center; 
-    width: 15.5rem; 
-    gap: 5px;
-    margin: -1.3125rem 0 1.25rem 0;
-    transition: opacity 0.5s ease-in;
-}
-#username-signal,#password-signal p{ 
-    text-transform: lowercase;
-    font-size: 0.5rem;
-}
 
 .status{
     display: none;

@@ -55,20 +55,27 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
             const dbref = doc(db, "users", username_.value);
             const docSnap = await getDoc(dbref);
             if (docSnap.exists()) {              
-            const storedHashedPassword = docSnap.data().password;
-            
-            // Compare the entered password's hash with the stored hash
-            if (decpass(storedHashedPassword)) {
-                login(docSnap.data());
-            } else {
-              statusImg.src = "./error.svg"
-              statusLevel.style.backgroundColor = "red"
-              statusContent.textContent = "Incorrect password or username"
-              statusContainer.style.display = "block"
-              setTimeout(()=>{
-                statusContainer.style.display = "none"
-              },3500)
-            }
+              const storedHashedPassword = docSnap.data().password;
+              
+              // Compare the entered password's hash with the stored hash
+              if (decpass(storedHashedPassword)) {
+                  login(docSnap.data());
+                  statusImg.src = "./correct.svg"
+                  statusLevel.style.backgroundColor = "#00ff00"
+                  statusContent.textContent = `Login Successful`
+                  statusContainer.style.display = "block"
+                  setTimeout(()=>{
+                    statusContainer.style.display = "none"
+                  },3500)
+              } else {
+                statusImg.src = "./error.svg"
+                statusLevel.style.backgroundColor = "red"
+                statusContent.textContent = "Incorrect password or username"
+                statusContainer.style.display = "block"
+                setTimeout(()=>{
+                  statusContainer.style.display = "none"
+                },3500)
+              }
             } else {
               statusImg.src = "./error.svg"
               statusLevel.style.backgroundColor = "red"
