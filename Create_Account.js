@@ -26,6 +26,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
     const sign_upBtn = document.querySelector("#sign_up");
     const sign_upGoogleBtn = document.querySelector("#sign_up-google");
     const statusContainer = document.querySelector(".status")
+    const statusContent = document.querySelector(".status-content")
+    const statusImg = document.querySelector(".status-img")
+    const statusLevel = document.querySelector(".status-level")
 
     // Hash password
     function encpass() {
@@ -39,15 +42,33 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
       const passwordRegex = /^(?=.*[!@#$%^&*])(?=.*[A-Z])[A-Za-z\d!@#$%^&*]{1,6}$/;
 
       if (!usernameRegex.test(username_.value)) {
-        alert("Username must be 3-15 characters and only contain letters and numbers.");
+        statusImg.src = "./error.svg"
+        statusLevel.style.backgroundColor = "red"
+        statusContent.textContent = "Username must be 3-15 characters and only contain letters and numbers."
+        statusContainer.style.display = "block"
+        setTimeout(()=>{
+          statusContainer.style.display = "none"
+        },3500)
         return false;
       }
       if (!emailRegex.test(email_.value)) {
-        alert("Please enter a valid email address.");
+        statusImg.src = "./error.svg"
+        statusLevel.style.backgroundColor = "red"
+        statusContent.textContent = "Please enter a valid email address."
+        statusContainer.style.display = "block"
+        setTimeout(()=>{
+          statusContainer.style.display = "none"
+        },3500)
         return false;
       }
       if (!passwordRegex.test(password_.value)) {
-        alert("Password must include at least 1 uppercase letter, 1 special character, and be at most 6 characters long.");
+        statusImg.src = "./error.svg"
+        statusLevel.style.backgroundColor = "red"
+        statusContent.textContent = "Password must include at least 1 uppercase letter, 1 special character, and be at most 6 characters long."
+        statusContainer.style.display = "block"
+        setTimeout(()=>{
+          statusContainer.style.display = "none"
+        },3500)
         return false;
       }
       return true;
@@ -134,73 +155,72 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
 
     // checking validation per input
 
-    const usernameRegex = /^[a-zA-Z0-9]{3,15}$/;
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const passwordRegex = /^(?=.*[!@#$%^&*])(?=.*[A-Z])[A-Za-z\d!@#$%^&*]{1,6}$/;
-    
-    const usernameSignal = document.querySelector("#username-signal");
-    const passwordSignal = document.querySelector("#password-signal");
-    const emailSignal = document.querySelector("#email-signal");
-    const emailWarningIcon = document.querySelector("#email-warning-icon");
-    const passwordWarningIcon = document.querySelector("#password-warning-icon");
-    const usernameWarningIcon = document.querySelector("#username-warning-icon");
-    
-    // Username validation
-    username_.addEventListener("focus", () => {
-      usernameSignal.style.opacity = 1;  // Show signal on focus
-    });
-    
-    username_.addEventListener("keyup", () => {
-      if (!usernameRegex.test(username_.value)) {
-        usernameWarningIcon.src = "./error.svg";  // Show error icon
-        usernameSignal.style.color = "red";  // Show red text for invalid input
-      } else {
-        usernameWarningIcon.src = "./correct.svg";  // Show success icon
-        usernameSignal.style.color = "green";  // Show green text for valid input
-      }
-    });
-    
-    username_.addEventListener("blur", () => {
-      usernameSignal.style.opacity = 0;  // Hide signal on blur
-    });
-    
-    // Password validation
-    password_.addEventListener("focus", () => {
-      passwordSignal.style.opacity = 1;  // Show signal on focus
-    });
-    
-    password_.addEventListener("keyup", () => {
-      if (!passwordRegex.test(password_.value)) {
-        passwordWarningIcon.src = "./error.svg";  // Show error icon
-        passwordSignal.style.color = "red";  // Show red text for invalid input
-      } else {
-        passwordWarningIcon.src = "./correct.svg";  // Show success icon
-        passwordSignal.style.color = "green";  // Show green text for valid input
-      }
-    });
-    
-    password_.addEventListener("blur", () => {
-      passwordSignal.style.opacity = 0;  // Hide signal on blur
-    });
-    
-    // Email validation
-    email_.addEventListener("focus", () => {
-      emailSignal.style.opacity = 1;  // Show signal on focus
-    });
-    
-    email_.addEventListener("keyup", () => {
-      if (!emailRegex.test(email_.value)) {
-        emailWarningIcon.src = "./error.svg";  // Show error icon
-        emailSignal.style.color = "red";  // Show red text for invalid input
-      } else {
-        emailWarningIcon.src = "./correct.svg";  // Show success icon
-        emailSignal.style.color = "green";  // Show green text for valid input
-      }
-    });
-    
-    email_.addEventListener("blur", () => {
-      emailSignal.style.opacity = 0;  // Hide signal on blur
-    });
+const usernameRegex = /^[a-zA-Z0-9]{3,15}$/;
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const passwordRegex = /^(?=.*[!@#$%^&*])(?=.*[A-Z])[A-Za-z\d!@#$%^&*]{1,6}$/;
+
+const usernameSignal = document.querySelector("#username-signal");
+const passwordSignal = document.querySelector("#password-signal");
+const emailSignal = document.querySelector("#email-signal");
+const emailWarningIcon = document.querySelector("#email-warning-icon");
+const passwordWarningIcon = document.querySelector("#password-warning-icon");
+const usernameWarningIcon = document.querySelector("#username-warning-icon");
+
+
+username_.addEventListener("focus", () => {
+  usernameSignal.style.opacity = 1;
+});
+
+username_.addEventListener("keyup", () => {
+  if (!usernameRegex.test(username_.value)) {
+    usernameWarningIcon.src = "./error.svg";
+    usernameSignal.style.color = "red";
+  } else {
+    usernameWarningIcon.src = "./correct.svg";
+    usernameSignal.style.color = "green";
+  }
+});
+
+username_.addEventListener("blur", () => {
+  usernameSignal.style.opacity = 0;
+});
+
+password_.addEventListener("focus", () => {
+  passwordSignal.style.opacity = 1;
+});
+
+password_.addEventListener("keyup", () => {
+  if (!passwordRegex.test(password_.value)) {
+    passwordWarningIcon.src = "./error.svg";
+    passwordSignal.style.color = "red";
+  } else {
+    passwordWarningIcon.src = "./correct.svg";
+    passwordSignal.style.color = "green";
+  }
+});
+
+password_.addEventListener("blur", () => {
+  passwordSignal.style.opacity = 0;
+});
+
+email_.addEventListener("focus", () => {
+  emailSignal.style.opacity = 1;
+});
+
+email_.addEventListener("keyup", () => {
+  if (!emailRegex.test(email_.value)) {
+    emailWarningIcon.src = "./error.svg";
+    emailSignal.style.color = "red";
+  } else {
+    emailWarningIcon.src = "./correct.svg";
+    emailSignal.style.color = "green";
+  }
+});
+
+email_.addEventListener("blur", () => {
+  emailSignal.style.opacity = 0;
+});
+
     
     
     
