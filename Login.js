@@ -43,7 +43,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
         if (emptySpaces(username_.value) || emptySpaces(password_.value)) {
           statusImg.src = "./error.svg"
               statusLevel.style.backgroundColor = "red"
-              statusContent.textContent = "All fields are required."
+              statusContent.textContent = "All fields must be filled."
               statusContainer.style.display = "block"
               setTimeout(()=>{
                 statusContainer.style.display = "none"
