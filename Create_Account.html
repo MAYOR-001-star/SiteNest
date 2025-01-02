@@ -28,13 +28,17 @@
         Please enter a valid email address.
       </span>
 
-      <input type="type" id="passcode" placeholder="Enter your password" required><br>
+      <input type="password" id="passcode" placeholder="Enter your password" required>
+      <span class="password-seer">
+        <img src="./show_password.svg" alt="password-padlock" class="password-padlock"/>
+      </span><br>
       <span id="password-signal">
         <div>
           <img src="./error.svg" alt="warning-icon" id="password-warning-icon"/>
         </div>
         Password must include at least 1 uppercase letter, 1 special character, and be at most 6 characters long.
       </span>
+      
 
       <button id="sign_up">Sign Up</button>
 

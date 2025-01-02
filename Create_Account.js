@@ -245,4 +245,15 @@ email_.addEventListener("blur", () => {
 
     
     
-    
+const passwordSeer = document.querySelector(".password-seer")
+const passwordPadlock = document.querySelector(".password-padlock")
+
+passwordSeer.addEventListener("click", ()=>{
+  if(password_.type === "password" && password_.value){
+    password_.type = "text"
+    passwordPadlock.src = "./hide_password.svg"
+  }else{
+    password_.type = "password"
+    passwordPadlock.src = "./show_password.svg"
+  }
+})

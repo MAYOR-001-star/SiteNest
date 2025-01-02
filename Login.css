@@ -202,3 +202,10 @@ label {
         width: 100%;
     }
 }
+
+
+.password-seer{
+    position: relative;
+    left: 6.5rem;
+    bottom: 3.4rem;
+}
