@@ -270,5 +270,19 @@ p{
 
 h2{
     text-align: center;
-    /* display: none; */
 }
+
+
+
+
+.bloggg-content {
+    transition: height 1s ease, opacity 1s ease;
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+  }
+  
+  .bloggg-content.show {
+    height: 200px;
+    opacity: 1;
+  }

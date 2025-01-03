@@ -33,6 +33,7 @@ window.addEventListener("load", () => {
   loader.classList.add("fadeOut");
   container.classList.add("fadeIn");
   login();
+  fetchAndDisplayBlogs();
 });
 
 // Login function to determine if user is logged in
@@ -95,6 +96,16 @@ async function fetchAndDisplayBlogs() {
     lockIcon.alt = "icon";
     lockIcon.classList.add("blog-padlock");
     openContainer.appendChild(lockIcon);
+    openContainer.addEventListener("click", ()=>{
+      if(lockIcon.src.includes("lock.svg")){
+        lockIcon.src = "./unlock.svg"
+      }else{
+        lockIcon.src = "./lock.svg"
+      }
+      const blogggContent = document.querySelector(".bloggg-content");
+      blogggContent.classList.toggle("show");
+    })
+
 
     divHeader.appendChild(titleParagraph);
     divHeader.appendChild(openContainer);
@@ -104,7 +115,7 @@ async function fetchAndDisplayBlogs() {
   // Function to create content (blog content + buttons)
   function createContent(title, content, blogId) {
     const divContent = document.createElement("div");
-
+    divContent.classList.add("bloggg-content")
     const blogParagraph = document.createElement("p");
     blogParagraph.classList.add("blog-paragraph");
     blogParagraph.textContent = content;
@@ -116,12 +127,12 @@ async function fetchAndDisplayBlogs() {
     const editBtn = document.createElement("button");
     editBtn.textContent = "Edit";
     editBtn.classList.add("edit-btn");
-    editBtn.onclick = () => editBlog(blogId, title, content);
+    editBtn.addEventListener('click', () => editBlog(blogId, title, content));
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     deleteBtn.classList.add("delete-btn");
-    deleteBtn.onclick = () => deleteBlog(blogId);
+    deleteBtn.addEventListener("click", () => deleteBlog(blogId))
 
     buttonContainer.appendChild(editBtn);
     buttonContainer.appendChild(deleteBtn);
@@ -130,7 +141,10 @@ async function fetchAndDisplayBlogs() {
     divContent.appendChild(buttonContainer);
     return divContent;
   }
+  blogContainerChecker()
 }
+
+fetchAndDisplayBlogs()
 
 // Add or update blog
 blogForm.addEventListener("submit", async (event) => {
@@ -254,12 +268,19 @@ function changer() {
 
   setInterval(update, 400);
 }
+
 changer();
 
-// const blogList = document.querySelector("#blog-list");
 
-// Check if there are any child elements in the blogList
-// blogList.children.length === 0 
-//   ? document.querySelector("#bloggg h2").style.display = "none" 
-//   : document.querySelector("#bloggg h2").style.display = "block";
+function blogContainerChecker() {
+  const header = document.querySelector("#bloggg h2");
+  if (blogList.children.length === 0) {
+    header.textContent = "No blogs yet";
+    header.style.fontStyle = "italic";
+  } else {
+    header.textContent = "Your Blogs";
+    header.style.fontStyle = "normal";
+  }
+}
+
 
