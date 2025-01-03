@@ -5,14 +5,19 @@
 }
 
 @font-face {
-    font-family: 'Aquatico';
-    src: url('./Aquatico-Regular.woff2') format('woff2'),
-        url('./Aquatico-Regular.woff') format('woff'),
-        url('./Aquatico-Regular.otf') format('opentype');
+    font-family: 'Cervanttis';
+    src: url('./Cervanttis.ttf') format('truetype');
 }
+
 
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serifato, sans-serif;
+}
+
+
+.brand-name {
+    font-family: 'Cervanttis', sans-serif;
+    text-decoration: none;
 }
 
 
@@ -223,6 +228,7 @@ p{
 
 #bloggg{
     margin: 2rem;
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -231,7 +237,6 @@ p{
     margin: 2rem;
 }
 #blog-list{
-    margin: 1rem;
     padding: 1rem;
     width: 100%;
 }
@@ -242,6 +247,7 @@ p{
     background-color: #94c2ff;
     border-radius: 5px 5px 0 0;
     padding: 1rem;
+    margin-top: 2rem;
 }
 .blog-padlock{
     width: 2rem;
@@ -270,6 +276,7 @@ p{
 
 h2{
     text-align: center;
+    margin-top: 4rem;
 }
 
 
@@ -280,9 +287,14 @@ h2{
     overflow: hidden;
     height: 0;
     opacity: 0;
-  }
-  
-  .bloggg-content.show {
+}
+
+.bloggg-content.show {
     height: 200px;
     opacity: 1;
-  }
+}
+
+
+#delete-account{
+    margin: 0;
+}

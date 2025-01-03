@@ -96,16 +96,22 @@ async function fetchAndDisplayBlogs() {
     lockIcon.alt = "icon";
     lockIcon.classList.add("blog-padlock");
     openContainer.appendChild(lockIcon);
-    openContainer.addEventListener("click", ()=>{
-      if(lockIcon.src.includes("lock.svg")){
-        lockIcon.src = "./unlock.svg"
-      }else{
-        lockIcon.src = "./lock.svg"
+    divHeader.addEventListener("click", () => {
+      const currentSrc = lockIcon.getAttribute("src");
+    
+      // Toggle the lock/unlock icon for the clicked blog
+      if (currentSrc === "./lock.svg") {
+        lockIcon.setAttribute("src", "./unlock.svg");
+      } else {
+        lockIcon.setAttribute("src", "./lock.svg");
       }
-      const blogggContent = document.querySelector(".bloggg-content");
-      blogggContent.classList.toggle("show");
-    })
-
+    
+      // Select the blog content for the clicked blog (based on parent element)
+      const divContent = openContainer.closest(".list").nextElementSibling;
+      
+      // Toggle the 'show' class for the specific blog content
+      divContent.classList.toggle("show");
+    });
 
     divHeader.appendChild(titleParagraph);
     divHeader.appendChild(openContainer);
@@ -283,4 +289,30 @@ function blogContainerChecker() {
   }
 }
 
+const deleteAccountBtn = document.querySelector("#delete-account") 
 
+async function deleteAccount() {
+  try {
+    const userRef = doc(db, "users", currentUser.email);
+
+    // Delete blogs subcollection first
+    const blogsCollectionRef = collection(db, "users", currentUser.email, "blogs");
+    const blogsSnapshot = await getDocs(blogsCollectionRef);
+
+    // Iterate through blogs and delete each blog document
+    for (const blogDoc of blogsSnapshot.docs) {
+      await deleteDoc(doc(db, "users", currentUser.email, "blogs", blogDoc.id));
+    }
+
+    // Now delete the user document
+    await deleteDoc(userRef);
+
+    // Redirect after deleting account
+    // window.location.href = "./Login.html";
+  } catch (error) {
+    alert("Error deleting account: " + error);
+  }
+}
+
+
+deleteAccountBtn.addEventListener("click", deleteAccount)
