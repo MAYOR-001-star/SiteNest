@@ -24,14 +24,21 @@ const blogList = document.querySelector("#blog-list");
 const loader = document.querySelector(".loader");
 const container = document.querySelector(".container");
 const totalCharacter = document.querySelector(".total-character-left");
+const statusContainer = document.querySelector(".status")
+const statusContent = document.querySelector(".status-content")
+const statusImg = document.querySelector(".status-img")
+const statusLevel = document.querySelector(".status-level")
+const undoBtn = document.querySelector("#undo-btn")
 
 let currentUser = null;
+// let blogUndo = false
 let isEditing = false;  // Flag to check if the user is editing a blog
 let editingBlogId = null;  // To store the ID of the blog being edited
 
 window.addEventListener("load", () => {
   loader.classList.add("fadeOut");
   container.classList.add("fadeIn");
+  // localStorage.clear()
   login();
   fetchAndDisplayBlogs();
 });
@@ -107,10 +114,10 @@ async function fetchAndDisplayBlogs() {
       }
     
       // Select the blog content for the clicked blog (based on parent element)
-      const divContent = openContainer.closest(".list").nextElementSibling;
-      
-      // Toggle the 'show' class for the specific blog content
-      divContent.classList.toggle("show");
+      const divContent = divHeader.nextElementSibling;
+      if (divContent) {
+          divContent.classList.toggle("show");
+      }
     });
 
     divHeader.appendChild(titleParagraph);
@@ -162,10 +169,26 @@ blogForm.addEventListener("submit", async (event) => {
   if (!title || !content) return;
 
   if (isEditing) {
+    statusImg.src = "./correct.svg"
+    statusLevel.style.backgroundColor = "#00ff00"
+    statusContent.textContent = `An existing blog was updated`
+    statusContainer.style.display = "block"
+    setTimeout(()=>{
+      statusContainer.style.display = "none"
+    },3500)
     await updateBlog(editingBlogId, title, content);
-  } else {
+  } else { 
+    statusImg.src = "./correct.svg"
+    statusLevel.style.backgroundColor = "#00ff00"
+    statusContent.textContent = `A blog was added`
+    statusContainer.style.display = "block"
+    setTimeout(()=>{
+      statusContainer.style.display = "none"
+    },3500)
     await addBlog(title, content);
   }
+
+
 
   // Reset form and state
   blogTitle.value = "";
@@ -207,9 +230,20 @@ async function updateBlog(blogId, title, content) {
 // Delete a blog
 async function deleteBlog(blogId) {
   try {
+    // blogUndo = true;
+    // undoBtn.style.display = "block"
+    // statusImg.src = "./correct.svg"
+    // statusLevel.style.backgroundColor = "#00ff00"
+    // statusContent.textContent = `Login Successful`
+    // statusContainer.style.display = "block"
+    // setTimeout(()=>{
+      // statusContainer.style.display = "none"
+    // },3500)
     const blogRef = doc(db, "users", currentUser.email, "blogs", blogId);
-    await deleteDoc(blogRef);
-    fetchAndDisplayBlogs();
+    // setTimeout(async () => {
+      await deleteDoc(blogRef); // Wait for the document to be deleted
+      fetchAndDisplayBlogs();   // Fetch and display updated blogs
+    // }, 3500);
   } catch (error) {
     console.error("Error deleting blog: ", error);
   }
@@ -293,26 +327,92 @@ const deleteAccountBtn = document.querySelector("#delete-account")
 
 async function deleteAccount() {
   try {
-    const userRef = doc(db, "users", currentUser.email);
+    // Get reference to the user document
+    const userRef = doc(db, "users", currentUser.username || currentUser.displayName);
 
-    // Delete blogs subcollection first
+    // Reference to the blogs subcollection
     const blogsCollectionRef = collection(db, "users", currentUser.email, "blogs");
     const blogsSnapshot = await getDocs(blogsCollectionRef);
 
-    // Iterate through blogs and delete each blog document
-    for (const blogDoc of blogsSnapshot.docs) {
-      await deleteDoc(doc(db, "users", currentUser.email, "blogs", blogDoc.id));
+    // Proceed with deletion only if blogs exist
+    if (!blogsSnapshot.empty) {
+      const deleteBlogPromises = blogsSnapshot.docs.map((blogDoc) =>
+        deleteDoc(doc(db, "users", currentUser.email, "blogs", blogDoc.id))
+      );
+      await Promise.all(deleteBlogPromises);
+      console.log("All blog documents deleted.");
+    } else {
+      console.log("No blogs found to delete.");
     }
 
-    // Now delete the user document
+    // Delete the user document after blogs are deleted
     await deleteDoc(userRef);
 
-    // Redirect after deleting account
-    // window.location.href = "./Login.html";
+    // Optionally redirect after successful deletion
+    alert("Account deleted successfully!");
+    window.location.href = "./Create_Account.html";
   } catch (error) {
-    alert("Error deleting account: " + error);
+    alert("Error deleting account: " + error.message);
+  }
+}
+
+deleteAccountBtn.addEventListener("click", ()=>{
+  undoBtn.style.display = "block"
+  statusImg.src = "./correct.svg"
+  statusLevel.style.backgroundColor = "#00ff00"
+  statusContent.textContent = `Are you sure you want to delete this Account`
+  statusContainer.style.display = "block"
+  setTimeout(()=>{
+    statusContainer.style.display = "none"
+  },3500)
+  setTimeout(()=>{
+    deleteAccount()
+  },3500)
+});
+
+
+
+
+async function undo() {
+  try {
+    // Fetch user data from localStorage or sessionStorage
+    let user = JSON.parse(localStorage.getItem("user")) || JSON.parse(sessionStorage.getItem("user"));
+    if (!user) {
+      alert("No user data available.");
+      return;
+    }
+
+    // if (blogUndo) {
+    //   // Ensure title and content are available for restoring the blog
+    //   const title = blogTitle.value.trim();
+    //   const content = blogContent.value.trim();
+      
+    //   if (title && content) {
+    //     // Call addBlog function to restore the deleted blog
+    //     await addBlog(title, content);
+    //     blogUndo = false;
+    //     undoBtn.style.display = "none"; // Hide the undo button after restoring
+    //   } else {
+    //     alert("Title and content are required to restore a blog.");
+    //   }
+    // } else {
+      // Restore user data if needed
+      await setDoc(doc(db, "users", currentUser.username || currentUser.displayName), { ...user });
+      
+      // Update localStorage and sessionStorage to reflect the restored user
+      localStorage.setItem("keepLoggedIn", "yes");
+      localStorage.setItem("user", JSON.stringify(user));
+      sessionStorage.setItem("user", JSON.stringify(user));
+    
+      window.location.href = "./SiteNest.html";
+    // }
+
+    // alert("Restoration successful!");
+    // undoBtn.style.display = "block"
+  } catch (error) {
+    alert("Error during restoration: " + error.message);
   }
 }
 
 
-deleteAccountBtn.addEventListener("click", deleteAccount)
+undoBtn.addEventListener("click", undo);
