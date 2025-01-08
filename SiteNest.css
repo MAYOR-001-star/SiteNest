@@ -164,13 +164,15 @@ body {
 }
 #userlink{
     font-style: italic;
+    display: block;
     text-align: left;
+    width: auto;
 }
 .greetings-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 2rem 0 1rem 0;
+    margin: 2rem 0 1rem 0rem;
     padding: 0 1rem;
 }
 textarea{
@@ -217,6 +219,9 @@ p{
     text-align: center;
     width: 100%;
 }
+.changer-content{
+    font-size: small;
+}
 .changer{
     margin-left: 0.3rem;
     font-weight: 900;
@@ -234,6 +239,8 @@ p{
     flex-direction: column;
 }
 #blog-form{
+    display: flex;
+    flex-direction: column;
     margin: 2rem;
 }
 #blog-list{
@@ -368,6 +375,20 @@ h2{
 }
 
 
-@media screen {
-    
+@media (min-width: 768px){
+    .content{
+        margin: auto;
+        max-width: 40rem;
+    }
+    .greetings-container{
+        margin-left: 5rem;
+        justify-content: left;
+        gap: 5rem;
+    }
+    .changer-content{
+        font-size: large;
+    }
+    #blog-title{
+        margin-bottom: 2rem;
+    }
 }
