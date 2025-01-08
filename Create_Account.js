@@ -108,7 +108,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
         }, 3500);
 
       } catch (error) {
-        alert(`Error: ${error.message}`);
+        statusImg.src = "./correct.svg"
+        statusLevel.style.backgroundColor = "#00ff00"
+        statusContent.textContent = `Error: ${error.message}`
+        statusContainer.style.display = "block"
+        setTimeout(()=>{
+          statusContainer.style.display = "none"
+        },3500)
       }
     }
 
@@ -135,7 +141,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
           setTimeout(()=>{
             statusContainer.style.display = "none"
           },3500)
-          // alert(`Welcome, ${user.displayName}! Your account has been created.`);
           setInterval(()=>{
             login(user);
           },3500)
@@ -150,7 +155,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebas
           },3500)
         }
       } catch (error) {
-        alert(`Error during Google Sign-In: ${error.message}`);
+        statusImg.src = "./correct.svg"
+        statusLevel.style.backgroundColor = "#00ff00"
+        statusContent.textContent = `Error during Google Sign-In: ${error.message}`
+        statusContainer.style.display = "block"
+        setTimeout(()=>{
+          statusContainer.style.display = "none"
+        },3500)
       }
     }
 

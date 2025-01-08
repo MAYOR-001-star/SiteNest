@@ -209,7 +209,13 @@ async function addBlog(title, content) {
       createdAt: new Date(),
     });
   } catch (error) {
-    console.error("Error adding blog: ", error);
+    statusImg.src = "./correct.svg"
+    statusLevel.style.backgroundColor = "#00ff00"
+    statusContent.textContent = `${error}`
+    statusContainer.style.display = "block"
+    setTimeout(()=>{
+      statusContainer.style.display = "none"
+    },3500)
   }
 }
 
@@ -223,7 +229,13 @@ async function updateBlog(blogId, title, content) {
       updatedAt: new Date(),
     });
   } catch (error) {
-    console.error("Error updating blog: ", error);
+    statusImg.src = "./correct.svg"
+    statusLevel.style.backgroundColor = "#00ff00"
+    statusContent.textContent = `Error updating blog: , ${error}`
+    statusContainer.style.display = "block"
+    setTimeout(()=>{
+      statusContainer.style.display = "none"
+    },3500)
   }
 }
 
@@ -244,8 +256,14 @@ async function deleteBlog(blogId) {
       await deleteDoc(blogRef); // Wait for the document to be deleted
       fetchAndDisplayBlogs();   // Fetch and display updated blogs
     // }, 3500);
-  } catch (error) {
-    console.error("Error deleting blog: ", error);
+  } catch (error) { 
+    statusImg.src = "./correct.svg"
+    statusLevel.style.backgroundColor = "#00ff00"
+    statusContent.textContent = `Error deleting blog: , ${error}`
+    statusContainer.style.display = "block"
+    setTimeout(()=>{
+      statusContainer.style.display = "none"
+    },3500)
   }
 }
 
@@ -352,7 +370,13 @@ async function deleteAccount() {
     alert("Account deleted successfully!");
     window.location.href = "./Create_Account.html";
   } catch (error) {
-    alert("Error deleting account: " + error.message);
+    statusImg.src = "./correct.svg"
+    statusLevel.style.backgroundColor = "#00ff00"
+    statusContent.textContent = `${error.message}`
+    statusContainer.style.display = "block"
+    setTimeout(()=>{
+      statusContainer.style.display = "none"
+    },3500)
   }
 }
 
@@ -410,7 +434,13 @@ async function undo() {
     // alert("Restoration successful!");
     // undoBtn.style.display = "block"
   } catch (error) {
-    alert("Error during restoration: " + error.message);
+    statusImg.src = "./correct.svg"
+    statusLevel.style.backgroundColor = "#00ff00"
+    statusContent.textContent = `${error.message}`
+    statusContainer.style.display = "block"
+    setTimeout(()=>{
+      statusContainer.style.display = "none"
+    },3500)
   }
 }
 
